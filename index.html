@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BucketsCaPhe</title>
+  <title>Buckets. Cà Phê</title>
   <style>
     :root{
       --bg:#f6efe7;
@@ -461,7 +461,7 @@
 <body>
   <div class="topbar">
     <div class="container nav">
-      <div class="brand">BucketsCaPhe</div>
+      <div class="brand">Buckets.Cà Phê</div>
       <div class="nav-links">
         <a href="#menu">Menu</a>
         <a href="#contact">Facebook / Instagram</a>
@@ -473,16 +473,23 @@
   <header class="hero">
     <div class="container hero-grid">
       <div class="hero-card">
-        <div class="hero-badge">Cà phê nhà làm • Đặt trước • Nhận tại giờ hẹn</div>
-        <h1>BucketsCaPhe</h1>
+        <div class="hero-badge">Vietnamese Drip Coffee • Chậm Mà Chất</div>
+        <div class="hero-badge">More Than Coffee • It's Culture</div>
+        <div class="hero-badge">Pre-order • Curbside Pickup</div>
+        <h1>Buckets.Cà Phê</h1>
+        <p>
+          Authentic Vietnamese coffee featuring four signature drinks: Saigon Coffee, Egg Coffee, Salted Cream Coffee, and Coconut Coffee.
+          Just hop on the website, pick your drink, choose a pickup time, and leave a note.
+          We’ll have everything ready for you when you arrive.
+        </p>
         <p>
           Cà phê Việt đậm vị với 4 món signature: Cà Phê Sài Gòn, Cà Phê Trứng,
           Cà Phê Muối và Cà Phê Dừa. Khách chỉ cần vào web, chọn món, ghi giờ pickup
           và special note. Chủ tiệm ở nhà nhận order để chuẩn bị trước.
         </p>
         <div class="hero-actions">
-          <a class="cta-btn" href="#order">Đặt Order Ngay</a>
-          <a class="outline-btn" href="#menu">Xem Menu</a>
+          <a class="cta-btn" href="#order">Order Now</a>
+          <a class="outline-btn" href="#menu">Take a look at the Menu</a>
         </div>
       </div>
 
@@ -513,7 +520,6 @@
         <div class="section-head">
           <div>
             <h2>Menu</h2>
-            <p>Frontend này đã có sẵn 4 món đúng theo yêu cầu. Hiện tại là bản landing page + form order.</p>
           </div>
         </div>
 
@@ -620,28 +626,25 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Nhắn riêng qua Facebook hoặc Instagram</h2>
-            <p>Đây là chỗ để khách liên hệ riêng nếu muốn hỏi menu, đổi giờ pickup hoặc nhắn nhanh.</p>
+            <h2>Follow and Message us on Facebook and Instagram</h2>
+            <p>This is where customers can reach out directly to give feedback, adjust pickup times.</p>
+            <p>Đây là chỗ để khách liên hệ riêng, đổi giờ pickup hoặc nhắn nhanh.</p>
           </div>
         </div>
 
         <div class="social-grid">
           <div class="contact-card">
             <h3>Facebook</h3>
-            <p>Đổi link bên dưới thành Facebook Page hoặc Messenger link của tiệm.</p>
             <div class="social-links">
-              <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">Nhắn Facebook</a>
+              <a href="https://www.facebook.com/profile.php?id=61576482447963" target="_blank" rel="noopener noreferrer">Contact/Follow BucketsCaPhe</a>
             </div>
-            <p class="note">Ví dụ sau này mày có thể thay bằng link page, link Messenger hoặc link Facebook cá nhân bán hàng.</p>
           </div>
 
           <div class="contact-card">
             <h3>Instagram</h3>
-            <p>Đổi link bên dưới thành Instagram profile hoặc DM link của tiệm.</p>
             <div class="social-links">
-              <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">Nhắn Instagram</a>
+              <a href="https://www.instagram.com/bucketscaphe/reels/?hl=en" target="_blank" rel="noopener noreferrer">Contact/Follow BucketsCaPhe</a>
             </div>
-            <p class="note">Mày chỉ cần thay đúng URL là nút sẽ chạy.</p>
           </div>
         </div>
       </div>
@@ -651,39 +654,34 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Gửi Order</h2>
-            <p>Khách điền tên, 4 số cuối điện thoại, loại đồ uống, giờ pickup và special note. Bên phải là format preview đúng kiểu người pha chế nhìn là làm được luôn.</p>
+            <h2>Order Submission</h2>
           </div>
         </div>
 
         <div class="order-layout">
           <div class="panel">
-            <h3>Form Order</h3>
-            <p>
-              Form hiện tại đã sẵn sàng để gắn với dịch vụ nhận submission. Chỗ <strong>FORM_ENDPOINT</strong> ở code
-              là nơi mày dán endpoint từ Formspree hoặc dịch vụ tương tự để order gửi thẳng về email.
-            </p>
+            <h3>Order Form</h3>
 
-            <form id="orderForm" action="https://formspree.io/f/FORM_ENDPOINT" method="POST">
+            <form id="orderForm" action="https://formspree.io/f/meeppgoz" method="POST">
               <div class="form-grid">
                 <div class="field">
-                  <label for="customerName">Tên người order</label>
-                  <input type="text" id="customerName" name="customer_name" placeholder="Ví dụ: Dan Khuu" required />
+                  <label for="customerName">Your Name</label>
+                  <input type="text" id="customerName" name="customer_name" placeholder="Example: Eric Nguyễn" required />
                 </div>
 
                 <div class="field">
-                  <label for="phoneLast4">4 số cuối điện thoại</label>
-                  <input type="text" id="phoneLast4" name="phone_last4" placeholder="Ví dụ: 0958" maxlength="4" pattern="[0-9]{4}" required />
+                  <label for="phoneLast4">Last 4 of your phone</label>
+                  <input type="text" id="phoneLast4" name="phone_last4" placeholder="Example: 1234" maxlength="4" pattern="[0-9]{4}" required />
                 </div>
               </div>
 
               <div class="field">
-                <label for="drinkType">Loại đồ uống</label>
+                <label for="drinkType">Type of drink</label>
                 <select id="drinkType" name="drink_type" required>
-                  <option value="Cà Phê Sài Gòn">Cà Phê Sài Gòn</option>
-                  <option value="Cà Phê Trứng">Cà Phê Trứng</option>
-                  <option value="Cà Phê Muối" selected>Cà Phê Muối</option>
-                  <option value="Cà Phê Dừa">Cà Phê Dừa</option>
+                  <option value="Cà Phê Sài Gòn">$6.50 = Cà Phê Sài Gòn = Saigon Coffee</option>
+                  <option value="Cà Phê Trứng">$8.00 = Cà Phê Trứng = Egg Coffee</option>
+                  <option value="Cà Phê Muối" selected>$8.00 = Cà Phê Muối = Salted Cream Coffee</option>
+                  <option value="Cà Phê Dừa">$8.00 = Cà Phê Dừa = Coconut Coffee</option>
                 </select>
               </div>
 
@@ -695,43 +693,24 @@
 
               <div class="field">
                 <label for="specialNote">Special Note</label>
-                <textarea id="specialNote" name="special_note" placeholder="Ví dụ: Ít đá và dùng oatmilk"></textarea>
+                <textarea id="specialNote" name="special_note" placeholder="Example: Less Ice, Sub with Oatmilk"></textarea>
               </div>
 
               <input type="hidden" name="_subject" value="BucketsCaPhe - New Order" />
               <input type="hidden" name="formatted_order" id="formattedOrderField" />
 
               <div class="submit-row">
-                <button type="submit" class="primary-btn">Gửi Order</button>
-                <button type="button" class="ghost-btn" id="copyBtn">Copy Format</button>
+                <button type="submit" class="primary-btn">Submit Order</button>
                 <span class="status" id="statusText"></span>
               </div>
             </form>
 
-            <div class="recommend-box">
-              <strong>Setup recommended:</strong>
-              Dùng dịch vụ nhận form rồi gửi email notification về cho mày. Nhanh nhất là static site + endpoint form.
-              Sau này nếu mày muốn nâng cấp thì tao khuyên thêm Google Sheet hoặc Airtable để lưu lịch sử order.
-            </div>
           </div>
-
-          <div class="panel">
-            <h3>Preview cho người pha chế</h3>
-            <div class="preview" id="orderPreview">Người Order: Dan Khuu + 4 số cuối của số điện thoại: 0958
-Loại Đồ Uống: Cà Phê Muối + Special Note: Ít đá và dùng oatmilk
-Giờ Pickup: 4:00 PM</div>
-            <p class="helper">
-              Khi submit, website sẽ gửi kèm text format này để mày nhìn phát là pha luôn.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      BucketsCaPhe © 2026 • Frontend order landing page
+      BucketsCaPhe © 2026 • Order landing page
     </div>
   </footer>
 
@@ -755,7 +734,7 @@ Giờ Pickup: 4:00 PM</div>
       return `${hour12}:${mm} ${suffix}`;
     }
 
-    function buildTimeSlots(startHour = 8, endHour = 20) {
+    function buildTimeSlots(startHour = 8, endHour = 17) {
       const options = [];
       for (let h = startHour; h <= endHour; h++) {
         for (let m = 0; m < 60; m += 15) {
@@ -767,7 +746,7 @@ Giờ Pickup: 4:00 PM</div>
     }
 
     function renderTimeOptions() {
-      const slots = buildTimeSlots(8, 20);
+      const slots = buildTimeSlots(8, 17);
       pickupTime.innerHTML = slots.map((slot, index) => {
         const selected = slot === "4:00 PM" ? "selected" : "";
         return `<option value="${slot}" ${selected}>${slot}</option>`;
