@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BucketsCaPhe</title>
+  <style>
+    :root{
+      --bg:#f6efe7;
+      --card:#fffaf5;
+      --brown:#5b3a29;
+      --brown-2:#7a4f37;
+      --cream:#efe2d2;
+      --accent:#c77d4a;
+      --accent-2:#8b5e3c;
+      --text:#2e2119;
+      --muted:#6e5a4d;
+      --line:#e6d6c8;
+      --success:#2f7d4b;
+      --shadow:0 12px 30px rgba(70, 38, 20, 0.10);
+      --radius:24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(199,125,74,0.12), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(91,58,41,0.10), transparent 20%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(246, 239, 231, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(91,58,41,0.08);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--brown);
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a,
+    .cta-btn,
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      font-size: 0.98rem;
+    }
+
+    .nav-links a {
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--brown);
+    }
+
+    .nav-links a:hover,
+    .cta-btn:hover,
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .cta-btn {
+      background: var(--brown);
+      color: white;
+      box-shadow: var(--shadow);
+      display: inline-block;
+    }
+
+    .hero {
+      padding: 70px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .panel,
+    .menu-card,
+    .contact-card {
+      background: rgba(255,250,245,0.95);
+      border: 1px solid rgba(122,79,55,0.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--brown-2);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1.02;
+      color: var(--brown);
+    }
+
+    .hero p {
+      margin: 0 0 24px;
+      font-size: 1.06rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .outline-btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--brown);
+      color: var(--brown);
+      background: transparent;
+      font-weight: 700;
+    }
+
+    .hero-visual {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      min-height: 100%;
+    }
+
+    .drink-tile {
+      border-radius: 22px;
+      padding: 22px;
+      color: white;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    .drink-tile h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .drink-tile small {
+      opacity: 0.95;
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+
+    .saigon { background: linear-gradient(135deg, #4b2e20, #8c5d3d); }
+    .trung { background: linear-gradient(135deg, #8f5f2b, #d7a955); }
+    .muoi  { background: linear-gradient(135deg, #6b4a33, #b37a51); }
+    .dua   { background: linear-gradient(135deg, #5a6c58, #8cb18b); }
+
+    section {
+      padding: 30px 0 18px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      color: var(--brown);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .menu-card {
+      overflow: hidden;
+    }
+
+    .menu-image {
+      height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-image svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .menu-body {
+      padding: 18px;
+    }
+
+    .menu-body h3 {
+      margin: 0 0 8px;
+      color: var(--brown);
+      font-size: 1.18rem;
+    }
+
+    .menu-body p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .contact-card {
+      padding: 24px;
+    }
+
+    .contact-card h3 {
+      margin-top: 0;
+      color: var(--brown);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .social-links a {
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--brown);
+    }
+
+    .social-links a:hover {
+      background: var(--cream);
+    }
+
+    .order-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: var(--brown);
+      font-size: 1.35rem;
+    }
+
+    .panel p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    form {
+      margin-top: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: var(--brown);
+      font-size: 0.96rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(199,125,74,0.12);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .helper {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .submit-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .primary-btn {
+      background: var(--brown);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .ghost-btn {
+      background: #fff;
+      color: var(--brown);
+      border: 1px solid var(--line);
+    }
+
+    .status {
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    .preview {
+      background: linear-gradient(180deg, #fffdf9, #f7ede4);
+      border: 1px dashed rgba(91,58,41,0.22);
+      border-radius: 22px;
+      padding: 20px;
+      white-space: pre-wrap;
+      font-family: "Courier New", Courier, monospace;
+      line-height: 1.7;
+      color: #41271c;
+      min-height: 250px;
+    }
+
+    .recommend-box {
+      margin-top: 16px;
+      border-radius: 20px;
+      padding: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .recommend-box strong {
+      color: var(--brown);
+    }
+
+    .footer {
+      padding: 40px 0 60px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .note {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .order-layout, .menu-grid, .social-grid, .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-card, .panel, .contact-card { padding: 20px; }
+      .hero-visual { grid-template-columns: 1fr; }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .nav-links { width: 100%; }
+      .nav-links a { flex: 1 1 auto; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container nav">
+      <div class="brand">BucketsCaPhe</div>
+      <div class="nav-links">
+        <a href="#menu">Menu</a>
+        <a href="#contact">Facebook / Instagram</a>
+        <a href="#order">Order</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-card">
+        <div class="hero-badge">Cà phê nhà làm • Đặt trước • Nhận tại giờ hẹn</div>
+        <h1>BucketsCaPhe</h1>
+        <p>
+          Cà phê Việt đậm vị với 4 món signature: Cà Phê Sài Gòn, Cà Phê Trứng,
+          Cà Phê Muối và Cà Phê Dừa. Khách chỉ cần vào web, chọn món, ghi giờ pickup
+          và special note. Chủ tiệm ở nhà nhận order để chuẩn bị trước.
+        </p>
+        <div class="hero-actions">
+          <a class="cta-btn" href="#order">Đặt Order Ngay</a>
+          <a class="outline-btn" href="#menu">Xem Menu</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="drink-tile saigon">
+          <h3>Cà Phê Sài Gòn</h3>
+          <small>Đậm, thơm, phong cách cà phê sữa đá truyền thống.</small>
+        </div>
+        <div class="drink-tile trung">
+          <h3>Cà Phê Trứng</h3>
+          <small>Béo mịn, lớp kem trứng ngọt nhẹ và thơm.</small>
+        </div>
+        <div class="drink-tile muoi">
+          <h3>Cà Phê Muối</h3>
+          <small>Mặn ngọt cân bằng, hậu vị đậm và lạ miệng.</small>
+        </div>
+        <div class="drink-tile dua">
+          <h3>Cà Phê Dừa</h3>
+          <small>Mát lạnh, thơm dừa, hợp ngày nóng.</small>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="menu">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Menu</h2>
+            <p>Frontend này đã có sẵn 4 món đúng theo yêu cầu. Hiện tại là bản landing page + form order.</p>
+          </div>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <div class="menu-image">
+              <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cà phê Sài Gòn">
+                <defs>
+                  <linearGradient id="bg1" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#5a3723"/>
+                    <stop offset="100%" stop-color="#a36a44"/>
+                  </linearGradient>
+                </defs>
+                <rect width="400" height="240" fill="url(#bg1)"/>
+                <circle cx="320" cy="35" r="22" fill="rgba(255,255,255,0.18)"/>
+                <rect x="130" y="55" width="110" height="130" rx="18" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.35)"/>
+                <rect x="142" y="72" width="86" height="95" rx="10" fill="#4b2e20"/>
+                <rect x="142" y="135" width="86" height="32" rx="0" fill="#efe6d8"/>
+                <path d="M240 86 q25 6 22 28 q-2 23 -22 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="8" stroke-linecap="round"/>
+                <path d="M163 40 q12 -22 24 0 M186 35 q12 -20 24 0" stroke="rgba(255,255,255,0.55)" stroke-width="5" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="menu-body">
+              <h3>Cà Phê Sài Gòn</h3>
+              <p>Cà phê sữa đá kiểu Sài Gòn, đậm vị và quen thuộc. Hợp cho khách thích uống classic.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-image">
+              <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cà phê Trứng">
+                <defs>
+                  <linearGradient id="bg2" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#8c5f26"/>
+                    <stop offset="100%" stop-color="#ddb264"/>
+                  </linearGradient>
+                </defs>
+                <rect width="400" height="240" fill="url(#bg2)"/>
+                <rect x="130" y="70" width="120" height="105" rx="22" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.35)"/>
+                <rect x="143" y="95" width="94" height="60" rx="12" fill="#5e3a25"/>
+                <ellipse cx="190" cy="92" rx="56" ry="22" fill="#f2d690"/>
+                <ellipse cx="190" cy="86" rx="43" ry="15" fill="#ffedbe"/>
+                <path d="M250 108 q23 3 23 20 q0 17 -23 20" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="menu-body">
+              <h3>Cà Phê Trứng</h3>
+              <p>Lớp kem trứng bông mịn phủ trên cà phê đậm, vị béo thơm và ngọt nhẹ.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-image">
+              <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cà phê Muối">
+                <defs>
+                  <linearGradient id="bg3" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#6e4a32"/>
+                    <stop offset="100%" stop-color="#c18859"/>
+                  </linearGradient>
+                </defs>
+                <rect width="400" height="240" fill="url(#bg3)"/>
+                <rect x="140" y="60" width="104" height="128" rx="20" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.35)"/>
+                <rect x="152" y="88" width="80" height="86" rx="12" fill="#533222"/>
+                <rect x="152" y="76" width="80" height="18" rx="9" fill="#f2eee8"/>
+                <circle cx="107" cy="170" r="10" fill="rgba(255,255,255,0.55)"/>
+                <circle cx="93" cy="182" r="6" fill="rgba(255,255,255,0.45)"/>
+                <circle cx="119" cy="186" r="7" fill="rgba(255,255,255,0.45)"/>
+              </svg>
+            </div>
+            <div class="menu-body">
+              <h3>Cà Phê Muối</h3>
+              <p>Cân bằng giữa vị cà phê đậm và vị kem muối. Signature rất hợp để tạo điểm nhớ cho khách.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-image">
+              <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cà phê Dừa">
+                <defs>
+                  <linearGradient id="bg4" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#5c775c"/>
+                    <stop offset="100%" stop-color="#a7c8a2"/>
+                  </linearGradient>
+                </defs>
+                <rect width="400" height="240" fill="url(#bg4)"/>
+                <rect x="138" y="60" width="110" height="132" rx="20" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.35)"/>
+                <rect x="150" y="90" width="86" height="88" rx="12" fill="#e8e0cf"/>
+                <rect x="150" y="130" width="86" height="48" rx="0" fill="#7a5238"/>
+                <path d="M235 68 l45 -28" stroke="#2d5d39" stroke-width="8" stroke-linecap="round"/>
+                <path d="M280 40 q-6 22 -28 30" stroke="#346c43" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <path d="M284 42 q-25 1 -37 18" stroke="#3f8250" stroke-width="8" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="menu-body">
+              <h3>Cà Phê Dừa</h3>
+              <p>Mịn, mát và thơm vị dừa. Hợp khách thích đồ uống béo dịu và uống lạnh.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Nhắn riêng qua Facebook hoặc Instagram</h2>
+            <p>Đây là chỗ để khách liên hệ riêng nếu muốn hỏi menu, đổi giờ pickup hoặc nhắn nhanh.</p>
+          </div>
+        </div>
+
+        <div class="social-grid">
+          <div class="contact-card">
+            <h3>Facebook</h3>
+            <p>Đổi link bên dưới thành Facebook Page hoặc Messenger link của tiệm.</p>
+            <div class="social-links">
+              <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">Nhắn Facebook</a>
+            </div>
+            <p class="note">Ví dụ sau này mày có thể thay bằng link page, link Messenger hoặc link Facebook cá nhân bán hàng.</p>
+          </div>
+
+          <div class="contact-card">
+            <h3>Instagram</h3>
+            <p>Đổi link bên dưới thành Instagram profile hoặc DM link của tiệm.</p>
+            <div class="social-links">
+              <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">Nhắn Instagram</a>
+            </div>
+            <p class="note">Mày chỉ cần thay đúng URL là nút sẽ chạy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="order">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Gửi Order</h2>
+            <p>Khách điền tên, 4 số cuối điện thoại, loại đồ uống, giờ pickup và special note. Bên phải là format preview đúng kiểu người pha chế nhìn là làm được luôn.</p>
+          </div>
+        </div>
+
+        <div class="order-layout">
+          <div class="panel">
+            <h3>Form Order</h3>
+            <p>
+              Form hiện tại đã sẵn sàng để gắn với dịch vụ nhận submission. Chỗ <strong>FORM_ENDPOINT</strong> ở code
+              là nơi mày dán endpoint từ Formspree hoặc dịch vụ tương tự để order gửi thẳng về email.
+            </p>
+
+            <form id="orderForm" action="https://formspree.io/f/FORM_ENDPOINT" method="POST">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="customerName">Tên người order</label>
+                  <input type="text" id="customerName" name="customer_name" placeholder="Ví dụ: Dan Khuu" required />
+                </div>
+
+                <div class="field">
+                  <label for="phoneLast4">4 số cuối điện thoại</label>
+                  <input type="text" id="phoneLast4" name="phone_last4" placeholder="Ví dụ: 0958" maxlength="4" pattern="[0-9]{4}" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="drinkType">Loại đồ uống</label>
+                <select id="drinkType" name="drink_type" required>
+                  <option value="Cà Phê Sài Gòn">Cà Phê Sài Gòn</option>
+                  <option value="Cà Phê Trứng">Cà Phê Trứng</option>
+                  <option value="Cà Phê Muối" selected>Cà Phê Muối</option>
+                  <option value="Cà Phê Dừa">Cà Phê Dừa</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="pickupTime">Giờ Pickup</label>
+                <select id="pickupTime" name="pickup_time" required></select>
+                <div class="helper">Khung giờ chia 15 phút, hiển thị AM/PM như yêu cầu.</div>
+              </div>
+
+              <div class="field">
+                <label for="specialNote">Special Note</label>
+                <textarea id="specialNote" name="special_note" placeholder="Ví dụ: Ít đá và dùng oatmilk"></textarea>
+              </div>
+
+              <input type="hidden" name="_subject" value="BucketsCaPhe - New Order" />
+              <input type="hidden" name="formatted_order" id="formattedOrderField" />
+
+              <div class="submit-row">
+                <button type="submit" class="primary-btn">Gửi Order</button>
+                <button type="button" class="ghost-btn" id="copyBtn">Copy Format</button>
+                <span class="status" id="statusText"></span>
+              </div>
+            </form>
+
+            <div class="recommend-box">
+              <strong>Setup recommended:</strong>
+              Dùng dịch vụ nhận form rồi gửi email notification về cho mày. Nhanh nhất là static site + endpoint form.
+              Sau này nếu mày muốn nâng cấp thì tao khuyên thêm Google Sheet hoặc Airtable để lưu lịch sử order.
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Preview cho người pha chế</h3>
+            <div class="preview" id="orderPreview">Người Order: Dan Khuu + 4 số cuối của số điện thoại: 0958
+Loại Đồ Uống: Cà Phê Muối + Special Note: Ít đá và dùng oatmilk
+Giờ Pickup: 4:00 PM</div>
+            <p class="helper">
+              Khi submit, website sẽ gửi kèm text format này để mày nhìn phát là pha luôn.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      BucketsCaPhe © 2026 • Frontend order landing page
+    </div>
+  </footer>
+
+  <script>
+    const pickupTime = document.getElementById("pickupTime");
+    const customerName = document.getElementById("customerName");
+    const phoneLast4 = document.getElementById("phoneLast4");
+    const drinkType = document.getElementById("drinkType");
+    const specialNote = document.getElementById("specialNote");
+    const orderPreview = document.getElementById("orderPreview");
+    const formattedOrderField = document.getElementById("formattedOrderField");
+    const copyBtn = document.getElementById("copyBtn");
+    const orderForm = document.getElementById("orderForm");
+    const statusText = document.getElementById("statusText");
+
+    function formatTime(hour24, minute) {
+      const suffix = hour24 >= 12 ? "PM" : "AM";
+      let hour12 = hour24 % 12;
+      if (hour12 === 0) hour12 = 12;
+      const mm = String(minute).padStart(2, "0");
+      return `${hour12}:${mm} ${suffix}`;
+    }
+
+    function buildTimeSlots(startHour = 8, endHour = 20) {
+      const options = [];
+      for (let h = startHour; h <= endHour; h++) {
+        for (let m = 0; m < 60; m += 15) {
+          if (h === endHour && m > 0) break;
+          options.push(formatTime(h, m));
+        }
+      }
+      return options;
+    }
+
+    function renderTimeOptions() {
+      const slots = buildTimeSlots(8, 20);
+      pickupTime.innerHTML = slots.map((slot, index) => {
+        const selected = slot === "4:00 PM" ? "selected" : "";
+        return `<option value="${slot}" ${selected}>${slot}</option>`;
+      }).join("");
+    }
+
+    function getPreviewText() {
+      const name = customerName.value.trim() || "Dan Khuu";
+      const phone = phoneLast4.value.trim() || "0958";
+      const drink = drinkType.value || "Cà Phê Muối";
+      const note = specialNote.value.trim() || "Không có";
+      const time = pickupTime.value || "4:00 PM";
+
+      return `Người Order: ${name} + 4 số cuối của số điện thoại: ${phone}
+Loại Đồ Uống: ${drink} + Special Note: ${note}
+Giờ Pickup: ${time}`;
+    }
+
+    function updatePreview() {
+      const text = getPreviewText();
+      orderPreview.textContent = text;
+      formattedOrderField.value = text;
+    }
+
+    renderTimeOptions();
+    updatePreview();
+
+    [customerName, phoneLast4, drinkType, specialNote, pickupTime].forEach(el => {
+      el.addEventListener("input", updatePreview);
+      el.addEventListener("change", updatePreview);
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(getPreviewText());
+        statusText.textContent = "Đã copy format";
+        setTimeout(() => statusText.textContent = "", 2000);
+      } catch (e) {
+        statusText.textContent = "Copy chưa thành công";
+        setTimeout(() => statusText.textContent = "", 2000);
+      }
+    });
+
+    orderForm.addEventListener("submit", function () {
+      formattedOrderField.value = getPreviewText();
+    });
+  </script>
+</body>
+</html>
