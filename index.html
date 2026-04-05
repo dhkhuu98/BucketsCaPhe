@@ -732,6 +732,7 @@
   const hiddenIframe = document.getElementById("hidden_iframe");
 
   let formSubmitted = false;
+  let submitTimer = null;
 
   function formatTime(hour24, minute) {
     const suffix = hour24 >= 12 ? "PM" : "AM";
@@ -760,23 +761,38 @@
     }).join("");
   }
 
+  function markSuccess() {
+    statusText.textContent = "Order sent successfully!";
+    orderForm.reset();
+    renderTimeOptions();
+    formSubmitted = false;
+
+    if (submitTimer) {
+      clearTimeout(submitTimer);
+      submitTimer = null;
+    }
+
+    setTimeout(() => {
+      statusText.textContent = "";
+    }, 3000);
+  }
+
   renderTimeOptions();
 
   orderForm.addEventListener("submit", function () {
     formSubmitted = true;
     statusText.textContent = "Sending order...";
+
+    submitTimer = setTimeout(() => {
+      if (formSubmitted) {
+        markSuccess();
+      }
+    }, 2500);
   });
 
   hiddenIframe.addEventListener("load", function () {
     if (formSubmitted) {
-      statusText.textContent = "Order sent successfully!";
-      orderForm.reset();
-      renderTimeOptions();
-      formSubmitted = false;
-
-      setTimeout(() => {
-        statusText.textContent = "";
-      }, 3000);
+      markSuccess();
     }
   });
 </script>
