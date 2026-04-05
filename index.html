@@ -651,66 +651,66 @@
     </section>
 
     <section id="order">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Order Submission</h2>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2>Order Submission</h2>
+      </div>
+    </div>
+
+    <div class="order-layout">
+      <div class="panel">
+        <h3>Order Form</h3>
+
+        <form id="orderForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="customerName">Your Name</label>
+              <input type="text" id="customerName" name="customer_name" placeholder="Example: Eric Nguyễn" required />
+            </div>
+
+            <div class="field">
+              <label for="phoneLast4">Last 4 of your phone</label>
+              <input type="text" id="phoneLast4" name="phone_last4" placeholder="Example: 1234" maxlength="4" pattern="[0-9]{4}" required />
+            </div>
           </div>
-        </div>
 
-        <div class="order-layout">
-          <div class="panel">
-            <h3>Order Form</h3>
-
-            <form id="orderForm">
-              <div class="form-grid">
-                <div class="field">
-                  <label for="customerName">Your Name</label>
-                  <input type="text" id="customerName" name="customer_name" placeholder="Example: Eric Nguyễn" required />
-                </div>
-
-                <div class="field">
-                  <label for="phoneLast4">Last 4 of your phone</label>
-                  <input type="text" id="phoneLast4" name="phone_last4" placeholder="Example: 1234" maxlength="4" pattern="[0-9]{4}" required />
-                </div>
-              </div>
-
-              <div class="field">
-                <label for="drinkType">Type of drink</label>
-                <select id="drinkType" name="drink_type" required>
-                  <option value="Cà Phê Sài Gòn">$6.50 = Cà Phê Sài Gòn = Saigon Coffee</option>
-                  <option value="Cà Phê Trứng">$8.00 = Cà Phê Trứng = Egg Coffee</option>
-                  <option value="Cà Phê Muối" selected>$8.00 = Cà Phê Muối = Salted Cream Coffee</option>
-                  <option value="Cà Phê Dừa">$8.00 = Cà Phê Dừa = Coconut Coffee</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="pickupDate">Pickup Date</label>
-                <input type="date" id="pickupDate" required />
-              </div>
-
-              <div class="field">
-                <label for="pickupTime">Giờ Pickup</label>
-                <select id="pickupTime" name="pickup_time" required></select>
-                <div class="helper">Khung giờ chia 15 phút, hiển thị AM/PM như yêu cầu.</div>
-              </div>
-
-              <div class="field">
-                <label for="specialNote">Special Note</label>
-                <textarea id="specialNote" name="special_note" placeholder="Example: Less Ice, Sub with Oatmilk"></textarea>
-              </div>
-
-              <input type="hidden" name="_subject" value="BucketsCaPhe - New Order" />
-              <input type="hidden" name="formatted_order" id="formattedOrderField" />
-
-              <div class="submit-row">
-                <button type="submit" class="primary-btn">Submit Order</button>
-                <span class="status" id="statusText"></span>
-              </div>
-            </form>
-
+          <div class="field">
+            <label for="drinkType">Type of drink</label>
+            <select id="drinkType" name="drink_type" required>
+              <option value="Cà Phê Sài Gòn">$6.50 = Cà Phê Sài Gòn = Saigon Coffee</option>
+              <option value="Cà Phê Trứng">$8.00 = Cà Phê Trứng = Egg Coffee</option>
+              <option value="Cà Phê Muối" selected>$8.00 = Cà Phê Muối = Salted Cream Coffee</option>
+              <option value="Cà Phê Dừa">$8.00 = Cà Phê Dừa = Coconut Coffee</option>
+            </select>
           </div>
+
+          <div class="field">
+            <label for="pickupDate">Pickup Date</label>
+            <input type="date" id="pickupDate" name="pickup_date" required />
+          </div>
+
+          <div class="field">
+            <label for="pickupTime">Pickup Time</label>
+            <select id="pickupTime" name="pickup_time" required></select>
+            <div class="helper">Time is divided into 15-minute slots with AM/PM format.</div>
+          </div>
+
+          <div class="field">
+            <label for="specialNote">Special Note</label>
+            <textarea id="specialNote" name="special_note" placeholder="Example: Less Ice, Sub with Oatmilk"></textarea>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="primary-btn">Submit Order</button>
+            <span class="status" id="statusText"></span>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
   </main>
 
   <footer class="footer">
@@ -721,7 +721,7 @@
 
   <script>
   const pickupTime = document.getElementById("pickupTime");
-  const pickupDate = document.getElementById("pickupDate"); // 👈 thêm
+  const pickupDate = document.getElementById("pickupDate");
   const customerName = document.getElementById("customerName");
   const phoneLast4 = document.getElementById("phoneLast4");
   const drinkType = document.getElementById("drinkType");
@@ -766,7 +766,7 @@
       phone_last4: phoneLast4.value.trim(),
       drink_type: drinkType.value,
       pickup_time: pickupTime.value,
-      pickup_date: pickupDate.value, // 👈 thêm
+      pickup_date: pickupDate.value,
       special_note: specialNote.value.trim()
     };
 
@@ -786,7 +786,7 @@
         throw new Error("HTTP " + response.status + " - " + result);
       }
 
-      statusText.textContent = "Order đã gửi!";
+      statusText.textContent = "Order sent successfully!";
       orderForm.reset();
       renderTimeOptions();
 
@@ -796,7 +796,7 @@
 
     } catch (error) {
       console.error(error);
-      statusText.textContent = "Gửi order lỗi";
+      statusText.textContent = "Order submission failed";
     }
   });
 </script>
