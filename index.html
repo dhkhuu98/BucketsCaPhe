@@ -761,22 +761,20 @@
   orderForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const data = {
-      customer_name: customerName.value.trim(),
-      phone_last4: phoneLast4.value.trim(),
-      drink_type: drinkType.value,
-      pickup_time: pickupTime.value,
-      pickup_date: pickupDate.value,
-      special_note: specialNote.value.trim()
-    };
+    statusText.textContent = "Sending order...";
+
+    const formData = new URLSearchParams();
+    formData.append("customer_name", customerName.value.trim());
+    formData.append("phone_last4", phoneLast4.value.trim());
+    formData.append("drink_type", drinkType.value);
+    formData.append("pickup_time", pickupTime.value);
+    formData.append("pickup_date", pickupDate.value);
+    formData.append("special_note", specialNote.value.trim());
 
     try {
       const response = await fetch("https://script.google.com/macros/s/AKfycbx5fuid52k2bOApK2hwIkfpyGlfP_gLQRzDh9MBGDe-TFC3ZYYMs_5QK2xYVNmSLVcI0Q/exec", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+        body: formData
       });
 
       const result = await response.text();
