@@ -686,6 +686,11 @@
               </div>
 
               <div class="field">
+                <label for="pickupDate">Pickup Date</label>
+                <input type="date" id="pickupDate" required />
+              </div>
+
+              <div class="field">
                 <label for="pickupTime">Giờ Pickup</label>
                 <select id="pickupTime" name="pickup_time" required></select>
                 <div class="helper">Khung giờ chia 15 phút, hiển thị AM/PM như yêu cầu.</div>
@@ -716,11 +721,11 @@
 
   <script>
   const pickupTime = document.getElementById("pickupTime");
+  const pickupDate = document.getElementById("pickupDate"); // 👈 thêm
   const customerName = document.getElementById("customerName");
   const phoneLast4 = document.getElementById("phoneLast4");
   const drinkType = document.getElementById("drinkType");
   const specialNote = document.getElementById("specialNote");
-  const formattedOrderField = document.getElementById("formattedOrderField");
   const orderForm = document.getElementById("orderForm");
   const statusText = document.getElementById("statusText");
 
@@ -751,29 +756,7 @@
     }).join("");
   }
 
-  function getPreviewText() {
-    const name = customerName.value.trim() || "";
-    const phone = phoneLast4.value.trim() || "";
-    const drink = drinkType.value || "";
-    const note = specialNote.value.trim() || "Không có";
-    const time = pickupTime.value || "";
-
-    return `Người Order: ${name} + 4 số cuối của số điện thoại: ${phone}
-Loại Đồ Uống: ${drink} + Special Note: ${note}
-Giờ Pickup: ${time}`;
-  }
-
-  function updatePreview() {
-    formattedOrderField.value = getPreviewText();
-  }
-
   renderTimeOptions();
-  updatePreview();
-
-  [customerName, phoneLast4, drinkType, specialNote, pickupTime].forEach(el => {
-    el.addEventListener("input", updatePreview);
-    el.addEventListener("change", updatePreview);
-  });
 
   orderForm.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -783,8 +766,8 @@ Giờ Pickup: ${time}`;
       phone_last4: phoneLast4.value.trim(),
       drink_type: drinkType.value,
       pickup_time: pickupTime.value,
-      special_note: specialNote.value.trim(),
-      formatted_order: getPreviewText()
+      pickup_date: pickupDate.value, // 👈 thêm
+      special_note: specialNote.value.trim()
     };
 
     try {
@@ -806,7 +789,6 @@ Giờ Pickup: ${time}`;
       statusText.textContent = "Order đã gửi!";
       orderForm.reset();
       renderTimeOptions();
-      updatePreview();
 
       setTimeout(() => {
         statusText.textContent = "";
