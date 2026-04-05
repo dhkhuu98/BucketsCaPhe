@@ -664,7 +664,7 @@
 
         <form
           id="orderForm"
-          action="https://script.google.com/macros/s/AKfycbyjvi8Y4onBmCJaIWQWrBP5PkgZSzPTpgjPFuqGJ1hhnwfzeEE5Oun9CIuR9L-NDWCjGA/exec"
+          action="https://script.google.com/macros/s/AKfycbyohrkl8qRR9LORLZ0FCL05unr2j4YqFQ07TnWk888nY7CLc7bzh9B6v0gZEHb-eJ3orA/exec"
           method="POST"
           target="hidden_iframe"
         >
@@ -711,7 +711,7 @@
             <span class="status" id="statusText"></span>
           </div>
         </form>
-        <iframe name="hidden_iframe" style="display:none;"></iframe>
+        <iframe id="hidden_iframe" name="hidden_iframe" style="display:none;"></iframe>
 
       </div>
     </div>
@@ -729,6 +729,9 @@
   const pickupTime = document.getElementById("pickupTime");
   const orderForm = document.getElementById("orderForm");
   const statusText = document.getElementById("statusText");
+  const hiddenIframe = document.getElementById("hidden_iframe");
+
+  let formSubmitted = false;
 
   function formatTime(hour24, minute) {
     const suffix = hour24 >= 12 ? "PM" : "AM";
@@ -760,22 +763,20 @@
   renderTimeOptions();
 
   orderForm.addEventListener("submit", function () {
+    formSubmitted = true;
     statusText.textContent = "Sending order...";
   });
 
-  window.addEventListener("message", function (event) {
-    if (event.data === "order-success") {
+  hiddenIframe.addEventListener("load", function () {
+    if (formSubmitted) {
       statusText.textContent = "Order sent successfully!";
       orderForm.reset();
       renderTimeOptions();
+      formSubmitted = false;
 
       setTimeout(() => {
         statusText.textContent = "";
       }, 3000);
-    }
-
-    if (event.data === "order-failed") {
-      statusText.textContent = "Order submission failed";
     }
   });
 </script>
