@@ -664,7 +664,7 @@
 
         <form
           id="orderForm"
-          action="https://script.google.com/macros/s/AKfycbyohrkl8qRR9LORLZ0FCL05unr2j4YqFQ07TnWk888nY7CLc7bzh9B6v0gZEHb-eJ3orA/exec"
+          action="https://script.google.com/macros/s/AKfycbyjvi8Y4onBmCJaIWQWrBP5PkgZSzPTpgjPFuqGJ1hhnwfzeEE5Oun9CIuR9L-NDWCjGA/exec"
           method="POST"
           target="hidden_iframe"
         >
@@ -790,11 +790,13 @@
     }, 2500);
   });
 
-  hiddenIframe.addEventListener("load", function () {
-    if (formSubmitted) {
-      markSuccess();
-    }
-  });
+  if (hiddenIframe) {
+    hiddenIframe.addEventListener("load", function () {
+      if (formSubmitted) {
+        markSuccess();
+      }
+    });
+  }
 </script>
 </body>
 </html>
